@@ -1,15 +1,24 @@
 import React from 'react'
-import { Button } from '@/components/ui/button';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import Auth from './pages/auth/Auth'
+import Profile from './pages/profile/Profile'
+import Chat from './pages/chat/Chat'
 
 const App = () => {
   return (
-    <div className='flex items-center justify-center flex-col h-screen'>
-      <h1>HELLO AND WELCOME</h1>
-      <Button>Click me</Button>
-      <div className="main bg-slate-500 h-1/2 w-1/2 flex items-center justify-center text-3xl tracking-widest font-black">
-        THIS IS TRIAL TEXT
-      </div>
-    </div>
+    <>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="*" element={<Navigate to="/auth" />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/chat" element={<Chat />} />
+
+      
+    </Routes>
+    </BrowserRouter>
+    </>
   )
 }
 
