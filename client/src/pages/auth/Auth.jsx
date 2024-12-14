@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { apiClient } from '@/lib/api-client.js'
-import { SIGNUP_ROUTE } from '@/utils/constants'
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from '@/utils/constants'
 
 const Auth = () => {
 
@@ -31,14 +31,48 @@ const Auth = () => {
     return true;
   }
 
+  const validateLogin= () =>{
+    if(!email.length){
+      toast.error("Email is required");
+      return false;
+    }
+    if(!password.length){
+      toast.error("Password is required");
+      return false;
+    }
+    return true;
+  }
   const handleLogin = async () => {
-
+    if(validateLogin()){
+      try{
+        const response = await apiClient.post(LOGIN_ROUTE, {email , password}, {withCredentials:true})
+        console.log({response})
+        toast.success("User Logged In Successfully!")
+      }
+      catch(error){
+        if(error.response && error.response.status === 400){
+          toast.error("User Does Not Exist!")
+        } else {
+          toast.error("Internal Server Error!")
+        }
+      }
+    }
   }
 
   const handleSignUp = async () => {
     if(validateSignUp()){
-      const response = await apiClient.post(SIGNUP_ROUTE, {email , password})
-      console.log({response})
+      try{
+        const response = await apiClient.post(SIGNUP_ROUTE, {email , password}, {withCredentials:true})
+        console.log({response})
+        toast.success("User Created Successfully!")
+      }
+      catch(error){
+        if(error.response && error.response.status === 400){
+          toast.error("User Already Exists!")
+        } else {
+          toast.error("Internal Server Error!")
+        }
+      }
     }
   }
 
