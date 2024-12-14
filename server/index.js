@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors'; 
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
+import authRoutes from './routes/AuthRoutes.js';
 
 
 // Load environment variables from .env file
@@ -26,6 +27,8 @@ app.use(cookieParser());
 
 // Body Parser
 app.use(express.json());
+
+app.use("/api/auth", authRoutes)
 
 // Routes
 const server = app.listen(port, ()=>{
