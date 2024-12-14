@@ -8,12 +8,13 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { apiClient } from '@/lib/api-client.js'
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from '@/utils/constants'
+import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
  
   const validateSignUp = () => {
     if(!email.length){
@@ -48,6 +49,14 @@ const Auth = () => {
         const response = await apiClient.post(LOGIN_ROUTE, {email , password}, {withCredentials:true})
         console.log({response})
         toast.success("User Logged In Successfully!")
+        if(response.data.user.id){
+          if(response.data.user.profileSetup){
+            navigate("/chat");
+          }
+          else{
+            navigate("/profile");
+          }
+        }
       }
       catch(error){
         if(error.response && error.response.status === 400){
@@ -65,6 +74,9 @@ const Auth = () => {
         const response = await apiClient.post(SIGNUP_ROUTE, {email , password}, {withCredentials:true})
         console.log({response})
         toast.success("User Created Successfully!")
+        if (response.status === 201) {
+          navigate("/profile");
+        }
       }
       catch(error){
         if(error.response && error.response.status === 400){
