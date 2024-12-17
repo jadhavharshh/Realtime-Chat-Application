@@ -3,16 +3,28 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Auth from './pages/auth/Auth'
 import Profile from './pages/profile/Profile'
 import Chat from './pages/chat/Chat'
+import { userAppStore } from './store'
+
+const PrivateRoute = ({ children }) => {
+  const { userInfo } = userAppStore();
+  const isAuthenticated = !!userInfo;
+  return isAuthenticated ? children : <Navigate to="/auth" />;
+}
+
+const AuthRoute = ({ children }) => {
+  const { userInfo } = userAppStore();
+  const isAuthenticated = !!userInfo;
+  return isAuthenticated ? <Navigate to="/chat"/>: children ;
+}
 
 const App = () => {
   return (
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
       <Route path="*" element={<Navigate to="/auth" />} />
-      <Route path="/auth" element={<Auth />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/auth" element={<AuthRoute><Auth /></AuthRoute>} />
+      <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path="/chat" element={<Chat />} />
 
       
