@@ -48,7 +48,11 @@ const Auth = () => {
   const handleLogin = async () => {
     if(validateLogin()){
       try{
-        const response = await apiClient.post(LOGIN_ROUTE, {email , password}, {withCredentials:true})
+        const response = await apiClient.post(
+          LOGIN_ROUTE, 
+          {email , password},
+          {withCredentials:true}
+        );
         console.log({response})
         toast.success("User Logged In Successfully!")
         if(response.data.user.id){

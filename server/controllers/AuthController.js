@@ -58,7 +58,7 @@ export const login = async (request, response , next ) => {
         if(!auth){
             return response.status(400).send("Invalid Password!");
         }
-        response.cookie("jwt", createToken(email , user.Id),{
+        response.cookie("jwt", createToken(email , user.id),{
                 maxAge,
                 secure:true,
                 sameSite:"none",
