@@ -22,6 +22,9 @@ app.use(cors({
     credentials : true,
 }));
 
+// Used for serving the static files
+app.use("/uploads/profiles" , express.static("uploads/profiles"));
+
 // Used for getting the cookies from the frontend
 app.use(cookieParser());
 
