@@ -1,7 +1,7 @@
 import User from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
-
+// Max Age for the cookie
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 // Create Token
@@ -85,6 +85,46 @@ export const getUserInfo = async (request, response , next ) => {
     try{
         //console.log(request.userId);
         const userData = await User.findById(request.userId);
+        if(!userData){
+            return response.status(404).send("User Does Not Exist!");
+        }
+        return response.status(200).json({
+                // Send the user data
+                id:userData.id,
+                email:userData.email,
+                profileSetup:userData.profileSetup,
+                firstName:userData.firstName,
+                lastName: userData.lastName,
+                image:userData.image,
+                color:userData.color,
+
+        });
+    } catch(error){
+        console.log({error});
+        return response.status(500).send("Internal Server Error!");
+    }
+
+}
+
+// Update User Profile function in Profile.jsx
+export const updateProfile = async (request, response , next ) => {
+    try{
+        //console.log(request.userId);
+        const {userId} = request;
+        const {firstName, lastName, color} = request.body;
+        if(!firstName || !lastName || color === undefined){
+            return response.status(400).send("First Name, Last Name and Color are required!");
+        }
+
+        const userData = await User.findByIdAndUpdate(
+            userId,
+            {
+            firstName, 
+            lastName, 
+            color, 
+            profileSetup:true
+            },
+            {new:true, runValidators:true});
         if(!userData){
             return response.status(404).send("User Does Not Exist!");
         }
