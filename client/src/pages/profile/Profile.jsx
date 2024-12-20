@@ -6,6 +6,7 @@ import { FaTrash , FaPlus } from 'react-icons/fa'
 import { Avatar,  AvatarImage } from "@/components/ui/avatar"
 import { colors, getColor } from "@/lib/utils"
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button';
 const Profile = () => {
   const navigate = useNavigate();
 
@@ -56,13 +57,13 @@ const Profile = () => {
           </div>
           <div className="flex min-w-32 md:min-w-64 flex-col gap-5 text-white items-center justify-center">
             <div className="w-full">
-              <Input placeholder="Email" type="email" disabled value={userInfo.email} className="rounded-lg p-6 border-none bg-slate-600"/>
+              <Input placeholder="Email" type="email" disabled value={userInfo.email} className="rounded-lg p-6 border-none !bg-slate-800"/>
             </div>
             <div className="w-full">
-              <Input placeholder="First Name" type="text" value={firstName} onChange={(e)=> setFirstName(e.target.value)} className="rounded-lg p-6 border-none bg-slate-600"/>
+              <Input placeholder="First Name" type="text" value={firstName} onChange={(e)=> setFirstName(e.target.value)} className="rounded-lg p-6 border-none bg-slate-800"/>
             </div>
             <div className="w-full">
-              <Input placeholder="Last Name" type="text" value={lastName} onChange={(e)=> setLastName(e.target.value)} className="rounded-lg p-6 border-none bg-slate-600"/>
+              <Input placeholder="Last Name" type="text" value={lastName} onChange={(e)=> setLastName(e.target.value)} className="rounded-lg p-6 border-none bg-slate-800"/>
             </div>
             <div className="w-full flex gap-5 justify-center">
             {
@@ -79,6 +80,11 @@ const Profile = () => {
             }
           </div>
           </div>
+        </div>
+        <div className="w-full flex items-center">
+          <Button className="h-12 w-full bg-purple-800 hover:bg-purple-950 rounded-3xl hover:"
+          onClick={saveChanges}
+          >Save Changes</Button>
         </div>
       </div>
     </div>
