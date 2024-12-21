@@ -1,7 +1,5 @@
 # TalkNest Chat Application
 
-![Project Logo](client/src/assets/lottie-json.json)
-
 TalkNest is a full-stack chat application built with a React frontend and an Express.js backend. It offers real-time messaging, user authentication, profile management, and a responsive design tailored for seamless user experience.
 
 ## Features
