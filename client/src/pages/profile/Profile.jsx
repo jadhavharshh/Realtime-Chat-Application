@@ -71,6 +71,15 @@ const Profile = () => {
     };
   };
 
+  useEffect(() => {
+    if (userInfo) {
+        if (userInfo.profileSetup) {
+            navigate('/chat'); // Redirect to chat if profile is set up
+        } else {
+            navigate('/auth'); // Redirect to auth if profile is not set up
+        }
+    }
+}, [userInfo, navigate]);
 
   const handleNavigate = () => {
     if(userInfo.profileSetup){
@@ -135,7 +144,7 @@ const Profile = () => {
                   alt="profile-avatar"
                   className="w-full h-full object-cover bg-black"
                 />
-                 ): (<div className={`uppercase h-32 w-32 md:w-48 md:h-48 text-5xl flex items-center justify-center border-[1px] rounded-full ${getColor(selectedColor)} `}>
+                  ): (<div className={`uppercase h-32 w-32 md:w-48 md:h-48 text-5xl flex items-center justify-center border-[1px] rounded-full ${getColor(selectedColor)} `}>
                   {firstName
                     ? firstName.split("").shift().toUpperCase()
                     : userInfo.email.split("").shift().toUpperCase()
@@ -169,7 +178,6 @@ const Profile = () => {
                   : ""
                 }
                 `} key={index} onClick={()=>setSelectedColor(index)}></div>
-
               ))
             }
           </div>
