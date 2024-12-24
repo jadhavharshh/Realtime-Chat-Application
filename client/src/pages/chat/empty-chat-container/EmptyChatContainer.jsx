@@ -3,7 +3,7 @@ import Lottie from "react-lottie"
 
 const EmptyChatContainer = () => {
   return (
-    <div className="flex-1 md:bg-[#1c1d25] md:flex flex-col justify-center items-center hidden duration-1000 transition-all">EmptyChatContainer
+    <div className="flex-1 md:bg-[#1c1d25] md:flex flex-col justify-center items-center hidden duration-1000 transition-all">
     <Lottie 
     isClickToPauseDisabled={true}
     height={200}
@@ -11,9 +11,9 @@ const EmptyChatContainer = () => {
     options={animationDefaultOptions}
     />
     <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-19 lg:text-4xl text-3xl transition-all duration-300 text-center">
-        <h3 className="poppins-bold">
-            <h1>Hi<span className="text-purple-500">!</span> Welcome to <span className="text-purple-500"> TalkNest</span> Chat App</h1>
-        </h3>
+        <div className="poppins-bold">
+          <h1>Hi<span className="text-purple-500">!</span> Welcome to <span className="text-purple-500"> TalkNest</span> Chat App</h1>
+        </div>
     </div>
     </div>
     
