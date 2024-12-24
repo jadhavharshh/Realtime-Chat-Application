@@ -70,17 +70,7 @@ const Profile = () => {
       }
     };
   };
-
-  useEffect(() => {
-    if (userInfo) {
-        if (userInfo.profileSetup) {
-            navigate('/chat'); // Redirect to chat if profile is set up
-        } else {
-            navigate('/auth'); // Redirect to auth if profile is not set up
-        }
-    }
-}, [userInfo, navigate]);
-
+  
   const handleNavigate = () => {
     if(userInfo.profileSetup){
       navigate("/chat");
