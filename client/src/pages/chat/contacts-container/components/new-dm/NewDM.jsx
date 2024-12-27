@@ -149,10 +149,10 @@ const NewDM = () => {
               />
               <div className="text-opacity-80 text-white flex flex-col gap-5 items-center mt-5 lg:text-2xl text-xl transition-all duration-300 text-center">
                 <h1 className="poppins-medium">
-                  <h1>
+                  <div>
                     Hi<span className="text-purple-500">! </span>Search New{" "}
                     <span className="text-purple-500"> Contact</span>
-                  </h1>
+                  </div>
                 </h1>
               </div>
             </div>

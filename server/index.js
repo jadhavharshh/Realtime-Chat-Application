@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import authRoutes from './routes/AuthRoutes.js';
 import contactRoutes from './routes/ContactRoutes.js';
+import MessagesRoutes from './routes/MessagesRoute.js';
 import setupSocket from './socket.js';
 
 
@@ -35,6 +36,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes)
 app.use("/api/contacts" , contactRoutes)
+app.use("/api/messages" , MessagesRoutes)
 
 // Routes
 const server = app.listen(port, ()=>{
