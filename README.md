@@ -29,5 +29,5 @@ TalkNest is a full-stack chat application built with a React frontend and an Exp
 
 ## Project Structure
 The project is structured into two main parts:
-- **`client/`**: Contains the React frontend.
+- **`client/`**: Contains the ReactJS frontend.
 - **`server/`**: Contains the NodeJS & Express.js backend.
