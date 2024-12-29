@@ -37,6 +37,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes)
 app.use("/api/contacts" , contactRoutes)
 app.use("/api/messages" , MessagesRoutes)
+app.use("/uploads/files" , express.static("uploads/files"));
 
 // Routes
 const server = app.listen(port, ()=>{
