@@ -4,6 +4,8 @@ export const chatSlice = (set,get ) => ({
     selectedChatData : undefined,
     selectedChatMessages : [],
     directMessagesContacts : [],
+    channels : [],
+    setChannels : (channels) => set({channels}),
 
     // Uploading and downloading files
     isUploading : false,
@@ -22,6 +24,10 @@ export const chatSlice = (set,get ) => ({
 
     setDirectMessagesContacts : (directMessagesContacts) => set({directMessagesContacts}),
 
+    addChannel : (channel) => {
+        const channels = get().channels;
+        set({channels:[channel , ...channels]});
+    },
     closeChat:() => set({selectedChatType:undefined,selectedChatData:undefined, selectedChatMessages:[]}),
     addMessage:(message) => { 
         const selectedChatMessages = get().selectedChatMessages;

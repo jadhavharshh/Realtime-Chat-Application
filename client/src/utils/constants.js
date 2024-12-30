@@ -11,8 +11,12 @@ export const LOGOUT_ROUTE = `${AUTH_ROUTES}/logout`;
 export const CONTACTS_ROUTE = "api/contacts";
 export const SEARCH_CONTACTS_ROUTE = `${CONTACTS_ROUTE}/search`;
 export const GET_DM_CONTACTS_ROUTE = `${CONTACTS_ROUTE}/get-contacts-for-dm`;
-
+export const GET_ALL_CONTACTS_ROUTE = `${CONTACTS_ROUTE}/get-all-contacts`;
 export const MESSAGES_ROUTE = "api/messages";
 export const GET_ALL_MESSAGES_ROUTE = `${MESSAGES_ROUTE}/get-messages`;
 
 export const UPLOAD_FILE_ROUTE = `${MESSAGES_ROUTE}/upload-file`;
+
+export const CHANNEL_ROUTES = "api/channel";
+export const CREATE_CHANNEL_ROUTE = `${CHANNEL_ROUTES}/create-channel`;
+export const GET_USER_CHANNELS_ROUTE = `${CHANNEL_ROUTES}/get-user-channels`;
