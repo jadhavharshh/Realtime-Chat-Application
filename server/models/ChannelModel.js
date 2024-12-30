@@ -6,8 +6,8 @@ const ChannelSchema = new Schema({
         required : true,
     },
     members :[
-        {type: moongoose.Schema.ObjectId, ref: "Users", required: true}],
-        admin : {type: moongoose.Schema.ObjectId, ref: "Users", required: true},
+        {type: moongoose.Schema.ObjectId, ref: "User", required: true}],
+        admin : {type: moongoose.Schema.ObjectId, ref: "User", required: true},
         messages : [
             {
                 type : moongoose.Schema.ObjectId,
