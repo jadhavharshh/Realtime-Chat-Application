@@ -8,6 +8,7 @@ import authRoutes from './routes/AuthRoutes.js';
 import contactRoutes from './routes/ContactRoutes.js';
 import MessagesRoutes from './routes/MessagesRoute.js';
 import setupSocket from './socket.js';
+import channelRoutes from './routes/ChannelRoutes.js';
 
 
 // Load environment variables from .env file
@@ -38,6 +39,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/contacts" , contactRoutes)
 app.use("/api/messages" , MessagesRoutes)
 app.use("/uploads/files" , express.static("uploads/files"));
+app.use("/api/channel", channelRoutes)
 
 // Routes
 const server = app.listen(port, ()=>{
