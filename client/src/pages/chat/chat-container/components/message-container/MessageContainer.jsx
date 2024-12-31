@@ -1,11 +1,13 @@
 import { apiClient } from "@/lib/api-client";
 import { userAppStore } from "@/store";
-import { GET_ALL_MESSAGES_ROUTE, HOST } from "@/utils/constants";
+import { GET_ALL_MESSAGES_ROUTE, GET_CHANNEL_MESSAGES, HOST } from "@/utils/constants";
 import moment from "moment";
 import { useRef , useEffect , useState } from "react";
 import { MdFolderZip } from "react-icons/md";
 import { IoMdArrowDown } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
+import { AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { getColor } from "@/lib/utils";
 
 const MessageContainer = () => {
   const scrollRef = useRef();
@@ -16,27 +18,47 @@ const MessageContainer = () => {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        console.log("ID IS:",selectedChatData._id);
-        const response = await apiClient.post
-        (GET_ALL_MESSAGES_ROUTE, 
-        {id:selectedChatData._id},
-        {withCredentials:true});
-        if(response.data.messages){
+        console.log("ID IS:", selectedChatData._id);
+        const response = await apiClient.post(
+          GET_ALL_MESSAGES_ROUTE, 
+          { id: selectedChatData._id },
+          { withCredentials: true }
+        );
+        if (response.data.messages) {
           setSelectedChatMessages(response.data.messages);
-          console.log("called the setselectedchatmessages")
+          console.log("called the setselectedchatmessages");
         }
       } catch (error) {
         console.log({ error });
       }
-    }
-    if(selectedChatData._id){
-      if(selectedChatType === "contact"){
-        console.log("Called the GETMESSAGES")
+    };
+  
+    const getChannelMessages = async () => {
+      try {
+        const response = await apiClient.get(
+          `${GET_CHANNEL_MESSAGES}/${selectedChatData._id}`, 
+          { withCredentials: true }
+        );
+        if (response.data.messages) {
+          setSelectedChatMessages(response.data.messages);
+          console.log("called the setselectedchatmessages");
+        }
+      } catch (error) {
+        console.log({ error });
+      }
+    };
+  
+    if (selectedChatData._id) {
+      if (selectedChatType === "contact") {
+        console.log("Called the GETMESSAGES");
         getMessages();
       }
+      if (selectedChatType === "channel") {
+        getChannelMessages();
+      }
     }
-
-  }, [selectedChatData, selectedChatType , setSelectedChatMessages])
+  }, [selectedChatData, selectedChatType, setSelectedChatMessages]); // Corrected closing bracket for dependency array
+  
   
 
   useEffect(() => {
@@ -88,10 +110,88 @@ const MessageContainer = () => {
           {
             selectedChatType === "contact" && renderDMMessages(message)
           }
+          {selectedChatType==="channel" && renderChannelMessages(message)}
         </div>
       )
     });
   };
+
+  const renderChannelMessages = (message) => {
+    return (
+        <div className={`mt-4 ${message.sender._id !== userInfo.id ? "text-left" : "text-right"}`}>
+            {
+                message.messageType === "text" && (
+                    <div className={`${
+                        message.sender._id === userInfo.id ?
+                            "bg-[#8417ff]/5 text-[#8417ff] border-[#8417ff]/50" :
+                            "bg-[#2a2b33]/5 text-[#fff] border-[#ffffff]/20"
+                    } border inline-block p-4 rounded my-1 max-w-[50%] break-words ml-9`}
+                    >{message.content}</div>
+                )
+            }
+                    {
+          message.messageType === "file" && 
+          <div className={`${
+            message.sender._id === userInfo.id ? 
+            "bg-[#8417ff]/5 text-[#8417ff] border-[#8417ff]/50" : 
+            "bg-[#2a2b33]/5 text-[#fff] border-[#ffffff]/20"
+          } border inline-block p-4 rounded my-1 max-w-[50%] break-words`}
+            >{checkIfImage(message.fileUrl)? <div className="cursor-pointer" 
+            onClick={() => {
+              setshowImage(true);
+              setImageURL(message.fileUrl);
+            }}>
+      <img
+        src={(`${HOST}/${message.fileUrl}`)}
+        alt="uploaded"
+        style={{ maxWidth: "400px" }}
+      />
+            </div>: 
+              <div className="flex items-center gap-2 justify-center">
+                <span className="text-white text-3xl bg-black rounded-full p-3 ">
+                  <MdFolderZip />
+                </span>
+                <span>{message.fileUrl.split("/").pop()}</span>
+                <span className="text-white flex justify-center items-center text-xl transition-all duration-300 bg-black/20 rounded-full p-3 cursor-pointer hover:bg-black/100" 
+                onClick={() => downloadFile(message.fileUrl)}>
+                <IoMdArrowDown className=""/>
+                </span>
+              </div>}</div>
+        }
+            {
+              message.sender._id !== userInfo.id ? (<div className="flex items-center justify-start gap-3">
+                <Avatar className="w-8 h-8 rounded-full overflow-hidden">
+                            {message.sender.image && (
+                              <AvatarImage
+                                src={encodeURI(`${HOST}/${message.sender.image}`)}
+                                alt="profile-avatar"
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.onerror = null; // Prevents infinite loop if fallback also fails
+                                  e.target.style.display = "none";
+                                }}
+                              />
+                            )}
+                              <AvatarFallback
+                                className={`uppercase h-8 w-8 text-lg flex items-center justify-center  rounded-full ${getColor(
+                                  message.sender.color
+                                )}`}
+                              >
+                                {message.sender.firstName ? message.sender.firstName.split("").shift() : message.sender.email.split("").shift()}
+                              </AvatarFallback>
+                          </Avatar>
+                          <span className="text-sm text-white/60 ">{`${message.sender.firstName} ${message.sender.lastName}`}</span>
+                          <span className="text-sm text-white/60 ">{
+                            moment(message.timestamp).format("LT")
+                          }</span>
+              </div>) : 
+              <div className="text-sm text-white/60 mt-1">{
+                            moment(message.timestamp).format("LT")
+                          }</div>
+            }
+        </div>
+    )
+};
 
   const renderDMMessages = (message) => {
     return (
