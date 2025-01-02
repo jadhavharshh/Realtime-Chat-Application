@@ -30,7 +30,7 @@ const ProfileInfo = () => {
         }        
     }
     return (
-    <div className="absolute bottom-0 h-16 flex items-center justify-between px-4 w-full bg-[#2a2b33]">
+    <div className="absolute bottom-0 h-16 flex items-center justify-between px-4 w-full  bg-[#1a1a1a] backdrop-blur-md ">
         <div className="flex items-center justify-center gap-3">
             <div className="w-12 h-12 relative ">
             <Avatar className="w-12 h-12 rounded-full overflow-hidden">

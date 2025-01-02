@@ -117,7 +117,7 @@ const Profile = () => {
     }
   };   
   return (
-    <div className="bg-[#1b1c24] h-screen w-full flex items-center justify-center flex-col gap-10">
+    <div className="  bg-gradient-to-br from-[#141414]/95 via-[#1a1a1a]/98 to-[#0f0f0f]/95 h-screen w-full flex items-center justify-center flex-col gap-10">
       <div className="flex flex-col gap-10 w-[80vw] md:w-max">
         <div>
           <IoArrowBack onClick={handleNavigate} className="text-4xl lg:text-6xl cursor-pointer text-white/90" />

@@ -35,7 +35,7 @@ const ContactsContainer = () => {
   }, []);
 
   return (
-    <div className="relative md:w-[35vw] lg:w-[30vw] xl:w-[20vw] bg-[#1b1c24] border-r-2 border-[#2f303b] w-full">
+    <div className="relative md:w-[35vw] lg:w-[30vw] xl:w-[20vw] bg-gradient-to-br from-[#1a1a1a] to-[#232323] backdrop-blur-lg bg-opacity-90 border-r-2 border-[#2f303b] w-full">
       <div className="pt-3">
         <Logo />
       </div>
@@ -67,31 +67,28 @@ export default ContactsContainer;
 const Logo = () => {
   return (
     <div className="flex p-5  justify-start items-center gap-2">
-      <svg
-        id="logo-38"
-        width="78"
-        height="32"
-        viewBox="0 0 78 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {" "}
-        <path
-          d="M55.5 0H77.5L58.5 32H36.5L55.5 0Z"
-          className="ccustom"
-          fill="#8338ec"
-        ></path>{" "}
-        <path
-          d="M35.5 0H51.5L32.5 32H16.5L35.5 0Z"
-          className="ccompli1"
-          fill="#975aed"
-        ></path>{" "}
-        <path
-          d="M19.5 0H31.5L12.5 32H0.5L19.5 0Z"
-          className="ccompli2"
-          fill="#a16ee8"
-        ></path>{" "}
-      </svg>
+<svg
+  id="custom-logo"
+  width="78"
+  height="32"
+  viewBox="0 0 78 32"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M10 0L30 32H50L70 0H10Z"
+    fill="#ff5c8e"
+  ></path>
+  <path
+    d="M20 4L30 32H40L50 4H20Z"
+    fill="#ff87a7"
+  ></path>
+  <path
+    d="M30 8L40 32H50L60 8H30Z"
+    fill="#ffb3c1"
+  ></path>
+</svg>
+
       <span className="text-3xl font-semibold ">TalkNest</span>
     </div>
   );
