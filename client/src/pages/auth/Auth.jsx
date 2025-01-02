@@ -1,5 +1,6 @@
 import React from 'react'
 import Background from '@/assets/login2.png' 
+import Trial from '@/assets/abs.jpg'
 import Victory from '@/assets/victory.svg'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useState } from 'react'
@@ -97,21 +98,23 @@ const Auth = () => {
   }
 
   return (
-    <div className="h-[100vh] flex items-center justify-center">
-      <div className=" border-2 h-[80vh] w-[80vw] md:w-[90vw] lg:w-[70vw] xl:w-[60vw]  flex justify-center items-center rounded-3xl xl:grid-cols-2">
-        <div className="bg-white flex flex-col items-center justify-center gap-5">
-          <div className="flex items-center justify-center flex-col">
-            <div className="flex items-center justify-center">
-              <h1 className="text-5xl font-bold md:text-6xl">Welcome</h1>
-              <img src={ Victory } className='h-[100px]' alt="Victory IMG" />
-            </div>
-            <p className="text-center font-medium">
-              Fill this to get Started with the Best Chat Application
-            </p>
-          </div>
+    <div className="h-[100vh] flex items-center justify-center w-full">
+      <div className=" h-[100vh] w-[100vw]   flex justify-around items-center  xl:grid-cols-2 ">
+
+        <div className="bg-white flex flex-col items-center justify-center gap-5 w-full h-full">
+        <div className="flex items-start justify-start flex-col w-5/6">
+  <div className="flex items-center justify-start">
+    <h1 className="text-5xl font-bold md:text-6xl">Welcome</h1>
+    <img src={Victory} className="h-[100px]" alt="Victory IMG" />
+  </div>
+  <p className="text-left font-normal">
+    Fill this to get Started with the Best Chat Application
+  </p>
+</div>
+
           <div className="flex items-center justify-center w-full">
           {/* This is the structure from SHADCN */}
-          <Tabs defaultValue='signup' className='w-5/6	 flex items-center justify-center flex-col'>
+          <Tabs defaultValue='login' className='w-5/6	 flex items-center justify-center flex-col'>
             <TabsList className="w-full bg-transparent rounded-none">
               <TabsTrigger value='signup' className='data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-black data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-300'>Sign Up</TabsTrigger>
               <TabsTrigger value='login' className='data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-black data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-300'>Login</TabsTrigger>
@@ -130,8 +133,9 @@ const Auth = () => {
           </Tabs>
           </div>
         </div>
-        <div className="hidden md:flex items-center justify-center">
-          <img src={ Background } className='h-[80vh]' alt="Background IMG" />
+
+        <div className="hidden md:flex items-center justify-center w-full">
+          <img src={ Trial } className='h-screen w-full object-cover'  alt="Background IMG" />
         </div>
       </div>
     </div>
