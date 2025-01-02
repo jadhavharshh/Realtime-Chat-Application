@@ -118,6 +118,7 @@ const MessageBar = () => {
         className="flex-1 p-5 bg-transparent rounded-md focus:border-none focus:outline-none" 
         placeholder="Enter a Message"
         value={message}
+        onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
         onChange={(e)=> setMessage(e.target.value)}/>
           <button className="text-neutral-500 focus:border-none focus:outline-none focus:text-white duration-300 transition-all" onClick={handleAttachmentClick}>
           <GrAttachment className="text-2xl"/>
@@ -136,7 +137,7 @@ const MessageBar = () => {
           </div>
         </div>
       </div>
-        <button className="text-white bg-[#8471ff] hover:bg-[#741bda] focus:bg-[#741bda] rounded-md flex items-center justify-center p-5 focus:border-none focus:outline-none focus:text-white duration-300 transition-all" onClick={handleSendMessage}>
+        <button className="text-white bg-[#8471ff] hover:bg-[#741bda] focus:bg-[#741bda] rounded-md flex items-center justify-center p-5 focus:border-none focus:outline-none focus:text-white duration-300 transition-all" onClick={handleSendMessage} >
         <IoSend className="text-2xl"/>
         </button>
     </div>
